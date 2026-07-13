@@ -1,0 +1,16 @@
+# ============================================================
+# PATH2CAMPUS — ROBOTS.TXT
+# ============================================================
+
+User-agent: *
+Allow: /
+
+# Lưu ý: /nhom-ho-tro.html KHÔNG được Disallow ở đây.
+# Trang đó đã có <meta name="robots" content="noindex, nofollow" />
+# trong HTML — cách này đáng tin cậy hơn robots.txt Disallow, vì
+# Google vẫn crawl được trang để ĐỌC thấy thẻ noindex và loại nó
+# khỏi kết quả tìm kiếm. Nếu Disallow ở đây, Google có thể không
+# crawl được để thấy noindex, và trong một số trường hợp vẫn hiện
+# URL trần (không có mô tả) trên kết quả tìm kiếm — phản tác dụng.
+
+Sitemap: https://path2campus.cloud/sitemap.xml

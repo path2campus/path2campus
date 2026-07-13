@@ -1,0 +1,506 @@
+/* ============================================================
+   PATH2CAMPUS — COUNTDOWN PAGE STYLES
+   Style riêng cho trang chủ: banner carousel, hero đếm ngược,
+   next-exam card, exam-active banner, schedule list, quote.
+   Phụ thuộc: variables.css, base.css, components.css
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   BANNER CAROUSEL — chỉ ở trang chủ, auto-play + nút bấm tay
+   ------------------------------------------------------------ */
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 8;
+  max-height: 480px;
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+
+.banner__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+.banner__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.banner__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 84, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  transition: background-color var(--transition-fast);
+}
+
+.banner__nav:hover {
+  background-color: rgba(0, 0, 84, 0.8);
+}
+
+.banner__nav--prev { left: var(--space-4); }
+.banner__nav--next { right: var(--space-4); }
+
+.banner__dots {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.banner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: background-color var(--transition-fast), width var(--transition-fast);
+}
+
+.banner__dot.is-active {
+  background-color: #fff;
+  width: 20px;
+  border-radius: var(--radius-signature);
+}
+
+/* Card nội dung — đè giữa banner, nội dung đổi theo slide (banner.js) */
+.banner__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  max-width: 420px;
+  width: calc(100% - var(--space-8));
+  background-color: rgba(255, 255, 255, 0.96);
+  border-radius: var(--radius-none);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-5) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.banner__card-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-navy);
+  line-height: var(--line-height-tight);
+}
+
+@media (max-width: 639px) {
+  .banner__card {
+    max-width: none;
+    width: calc(100% - var(--space-6));
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .banner__card-title {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 639px) {
+  .banner {
+    aspect-ratio: 4 / 3;
+  }
+
+  .banner__nav {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   COUNTDOWN HERO
+   ------------------------------------------------------------ */
+.countdown-hero {
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.countdown-hero__title {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-2xl);
+  color: var(--color-navy);
+}
+
+.countdown-hero__title span {
+  color: var(--color-crimson);
+}
+
+
+/* ------------------------------------------------------------
+   NEXT EXAM CARD — trạng thái "upcoming"
+   ------------------------------------------------------------ */
+.next-exam-card {
+  margin: var(--space-6) auto 0;
+  max-width: 480px;
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-none);
+  padding: var(--space-5) var(--space-6);
+}
+
+.next-exam-card__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.next-exam-card__subject {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-navy);
+  margin-bottom: var(--space-1);
+}
+
+.next-exam-card__date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.time-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+  background-color: var(--color-info-tint);
+  color: var(--color-action-blue-dark);
+  border-radius: var(--radius-signature);
+}
+
+.time-pill--start {
+  background-color: var(--color-navy-tint-90);
+  color: var(--color-navy);
+}
+
+.time-pill--duration {
+  background-color: var(--color-crimson-tint);
+  color: var(--color-crimson-dark);
+}
+
+
+/* ------------------------------------------------------------
+   EXAM ACTIVE BANNER — trạng thái "distributing" / "active"
+   Ẩn mặc định, hiện bằng JS khi vào đúng trạng thái
+   ------------------------------------------------------------ */
+.exam-active-banner {
+  display: none; /* countdown.js sẽ set display:block khi cần */
+  margin: var(--space-6) auto 0;
+  max-width: 480px;
+  background-color: var(--color-navy);
+  color: var(--color-text-on-navy);
+  border-radius: var(--radius-none);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.exam-active-banner__icon {
+  font-size: var(--font-size-2xl);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.exam-active-banner h2 {
+  color: var(--color-text-on-navy);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-2);
+}
+
+.exam-active-banner p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-signature);
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background-color: var(--color-crimson);
+  transition: width 1s linear;
+}
+
+
+/* ------------------------------------------------------------
+   COUNTDOWN NUMBERS
+   ------------------------------------------------------------ */
+.countdown-label {
+  margin: var(--space-6) 0 var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 76px;
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-sm);
+}
+
+.countdown-box__num {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-on-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-box__unit {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hiệu ứng nhấp nháy nhẹ khi số đổi — thay cho "flip" phức tạp,
+   nhẹ nhàng hơn, không gây khó chịu cho người nhạy cảm chuyển động */
+.countdown-box__num.is-updated {
+  animation: countdown-pulse 0.4s ease;
+}
+
+@keyframes countdown-pulse {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 639px) {
+  .countdown-box {
+    min-width: 64px;
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .countdown-box__num {
+    font-size: var(--font-size-xl);
+  }
+}
+
+
+/* ------------------------------------------------------------
+   QUOTE CARD
+   ------------------------------------------------------------ */
+.quote-card {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+}
+
+.quote-card__mark {
+  font-family: Georgia, serif;
+  font-size: var(--font-size-3xl);
+  color: var(--color-crimson);
+  opacity: 0.3;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.quote-card__text {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-navy);
+  line-height: var(--line-height-loose);
+  margin-bottom: var(--space-3);
+}
+
+.quote-card__author {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.quote-card__author-sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: var(--space-1);
+}
+
+.quote-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.quote-dots .quote-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), width var(--transition-fast);
+}
+
+.quote-dots .quote-dot.active {
+  background-color: var(--color-crimson);
+  width: 18px;
+  border-radius: var(--radius-signature);
+}
+
+
+/* ------------------------------------------------------------
+   SCHEDULE SECTION — renderSchedule() sinh ra .schedule-item
+   ------------------------------------------------------------ */
+.schedule-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.schedule-item.current {
+  border-left-color: var(--color-crimson);
+  background-color: var(--color-crimson-tint);
+}
+
+.schedule-item.past {
+  opacity: 0.55;
+}
+
+.item-icon {
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-subject {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-navy);
+  margin-bottom: var(--space-1);
+}
+
+.item-meta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.meta-sep {
+  opacity: 0.5;
+}
+
+.item-status {
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-signature);
+}
+
+.status-badge.done {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+.status-badge.active {
+  background-color: var(--color-crimson);
+  color: #fff;
+}
+
+.status-badge.next {
+  background-color: var(--color-navy);
+  color: #fff;
+}
+
+.status-badge.upcoming {
+  background-color: var(--color-navy-tint-90);
+  color: var(--color-navy);
+}
+
+@media (max-width: 639px) {
+  .schedule-item {
+    flex-wrap: wrap;
+  }
+
+  .item-status {
+    width: 100%;
+  }
+}

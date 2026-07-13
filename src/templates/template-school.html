@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Điểm chuẩn {{SCHOOL_NAME}} {{LATEST_YEAR}} — Path2Campus</title>
+  <meta name="description" content="Điểm chuẩn trúng tuyển {{SCHOOL_NAME}} ({{SCHOOL_CODE}}) các năm gần nhất, cập nhật đầy đủ theo từng ngành." />
+  <meta name="keywords" content="điểm chuẩn {{SCHOOL_NAME}}, điểm chuẩn {{SCHOOL_CODE}}, điểm chuẩn {{SCHOOL_CODE}} {{LATEST_YEAR}}" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Điểm chuẩn {{SCHOOL_NAME}} {{LATEST_YEAR}} — Path2Campus" />
+  <meta property="og:description" content="Điểm chuẩn trúng tuyển {{SCHOOL_NAME}} ({{SCHOOL_CODE}}) các năm gần nhất, cập nhật đầy đủ theo từng ngành." />
+  <meta property="og:url" content="{{CANONICAL_URL}}" />
+  <meta property="og:image" content="https://path2campus.cloud/img/og-image.webp" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/img/favicon.png" />
+  <link rel="apple-touch-icon" href="/img/favicon.png" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/diem-chuan.css" />
+
+  <!-- Structured data — giúp Google hiểu đây là trang dữ liệu tổ chức giáo dục -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollegeOrUniversity",
+    "name": "{{SCHOOL_NAME}}",
+    "url": "{{CANONICAL_URL}}"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <div class="site-header__topbar">
+      <div class="container">
+        <a href="/" class="site-header__logo">
+          <img src="/img/logo.webp" alt="Path2Campus" />
+          <span class="site-header__brand">Path2Campus</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="site-header__navbar">
+      <div class="container">
+        <nav class="site-nav" aria-label="Điều hướng chính">
+          <a href="/" class="site-nav__link">Trang chủ</a>
+          <a href="/nhom-ho-tro.html" class="site-nav__link">Nhóm hỗ trợ</a>
+          <a href="/diem-chuan.html" class="site-nav__link">Tra cứu điểm chuẩn</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ============================================================
+         BREADCRUMB + TIÊU ĐỀ
+         ============================================================ -->
+    <section class="section text-center diem-chuan-hero">
+      <div class="container">
+        <p class="text-muted" style="font-size: var(--font-size-xs); margin-bottom: var(--space-3);">
+          <a href="/diem-chuan.html" class="link-inline">Tra cứu điểm chuẩn</a> / {{SCHOOL_NAME}}
+        </p>
+        <span class="badge badge--navy">Mã trường: {{SCHOOL_CODE}}</span>
+        <h1 style="margin-top: var(--space-4);">Điểm chuẩn {{SCHOOL_NAME}}</h1>
+        <p style="max-width: 560px; margin: var(--space-3) auto 0;">
+          Điểm chuẩn trúng tuyển các năm: {{YEARS_LIST}}
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BẢNG ĐIỂM — HTML TĨNH, ĐÃ RENDER SẴN LÚC BUILD (SEO)
+         generate.js chèn nội dung {{SCORE_TABLE_ROWS}} và tự ẩn cột
+         trống bằng data-hidden, giống logic diem-chuan.js
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="score-table-wrap">
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th{{HIDE_MAJOR_CODE}}>Mã ngành</th>
+                <th{{HIDE_MAJOR_NAME}}>Tên ngành</th>
+                <th{{HIDE_YEAR}}>Năm</th>
+                <th{{HIDE_SCORE_THPT}}>THPT</th>
+                <th{{HIDE_SCORE_HOC_BA}}>Học bạ</th>
+                <th{{HIDE_SCORE_DGNL}}>ĐGNL</th>
+                <th{{HIDE_SCORE_VSAT}}>V-SAT</th>
+                <th{{HIDE_NOTE}}>Ghi chú</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{SCORE_TABLE_ROWS}}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-muted text-center" style="font-size: var(--font-size-xs); margin-top: var(--space-5);">
+          * Dữ liệu điểm chuẩn chỉ mang tính chất tham khảo, dựa trên thông báo tuyển sinh chính thức từ {{SCHOOL_NAME}}.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA — trỏ về trang tra cứu tương tác (có search/lọc)
+         ============================================================ -->
+    <section class="section section--alt text-center">
+      <div class="container">
+        <h2 style="margin-bottom: var(--space-3);">Tìm điểm chuẩn trường khác?</h2>
+        <p style="margin-bottom: var(--space-5);">Tra cứu nhanh điểm chuẩn của các trường đại học khác trên Path2Campus.</p>
+        <a href="/diem-chuan.html" class="btn btn--primary">Tra cứu điểm chuẩn</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="grid grid--cols-3">
+        <div>
+          <img src="/img/logo.webp" alt="Path2Campus" style="height: 32px; margin-bottom: var(--space-3);" />
+          <p style="opacity: 0.8; font-size: var(--font-size-sm);">
+            Nền tảng đếm ngược lịch thi &amp; tra cứu điểm chuẩn đại học dành cho học sinh Việt Nam.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-text-on-navy); margin-bottom: var(--space-3);">Liên kết</h4>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <a href="/">Trang chủ</a>
+            <a href="/nhom-ho-tro.html">Nhóm hỗ trợ</a>
+            <a href="/diem-chuan.html">Tra cứu điểm chuẩn</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: var(--color-text-on-navy); margin-bottom: var(--space-3);">Liên hệ</h4>
+          <p style="opacity: 0.8; font-size: var(--font-size-sm);">pathtocampus@proton.me</p>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p>&copy; 2026 Path2Campus — Lidora Studio. Dữ liệu điểm chuẩn chỉ mang tính chất tham khảo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+</body>
+</html>

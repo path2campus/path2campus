@@ -1,0 +1,230 @@
+/* ============================================================
+   PATH2CAMPUS — BASE STYLES
+   Reset, typography, layout nền tảng dùng chung cho mọi trang.
+   Phụ thuộc: variables.css (phải load TRƯỚC file này)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   FONT — Be Vietnam Pro (thay VNMuseo500, hỗ trợ tiếng Việt tốt)
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+
+/* ------------------------------------------------------------
+   RESET
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Bỏ animation cho người dùng bật "reduce motion" — quan trọng vì site
+   có carousel auto-play và countdown flip animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-navy);
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-loose);
+}
+
+a {
+  transition: color var(--transition-fast);
+}
+
+a.link-inline {
+  color: var(--color-action-blue);
+  text-decoration: underline;
+}
+
+a.link-inline:hover {
+  color: var(--color-action-blue-dark);
+}
+
+strong, b {
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-muted   { color: var(--color-text-muted); }
+.text-crimson { color: var(--color-crimson); }
+.text-navy    { color: var(--color-navy); }
+.text-center  { text-align: center; }
+
+
+/* ------------------------------------------------------------
+   LAYOUT — container & khoảng đệm chung
+   ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+}
+
+.section {
+  padding-block: var(--space-8);
+}
+
+.section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+/* Chừa khoảng trống dưới header cố định 2 tầng (top bar + nav bar) */
+.page-content {
+  padding-top: var(--header-total-height);
+}
+
+/* Lưới cột dùng chung — ví dụ khối "3 card giới thiệu" kiểu RMIT */
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+
+/* ------------------------------------------------------------
+   RESPONSIVE — breakpoints
+   mobile: < 640px | tablet: 640–1023px | desktop: >= 1024px
+   ------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .grid--cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid--cols-3 { grid-template-columns: repeat(2, 1fr); }
+
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --container-padding-inline: var(--space-4);
+  }
+
+  .grid--cols-2,
+  .grid--cols-3,
+  .grid--cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: var(--space-6);
+  }
+
+  h1 { font-size: var(--font-size-xl); }
+  h2 { font-size: var(--font-size-lg); }
+}
+
+
+/* ------------------------------------------------------------
+   UTILITY — ẩn phần tử chỉ về mặt hình ảnh, giữ cho screen reader
+   (dùng cho icon emoji cần thêm mô tả — vấn đề accessibility đã
+   nhắc ở bản review đầu tiên)
+   ------------------------------------------------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

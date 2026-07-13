@@ -1,0 +1,143 @@
+/* ============================================================
+   PATH2CAMPUS — DESIGN TOKENS
+   Tham khảo phong cách RMIT Vietnam (navy + crimson + light),
+   font VNMuseo500 (bản quyền) được thay bằng Be Vietnam Pro.
+   ============================================================ */
+
+:root {
+
+  /* ------------------------------------------------------------
+     MÀU SẮC — THƯƠNG HIỆU
+     ------------------------------------------------------------ */
+  --color-navy: #000054;           /* Navy Deep — heading, top bar, text chính */
+  --color-navy-tint-10: #1a1a66;   /* Navy nhạt hơn 1 bậc — hover trên nền navy */
+  --color-navy-tint-90: #e6e6ed;   /* Navy rất nhạt — nền phụ, badge nhẹ */
+
+  --color-crimson: #E60028;        /* Crimson — logo, CTA chính, badge cảnh báo */
+  --color-crimson-dark: #b8001f;   /* Crimson đậm hơn — hover trạng thái nút CTA */
+  --color-crimson-tint: #fde6ea;   /* Crimson rất nhạt — nền cảnh báo/badge nhẹ */
+
+  --color-action-blue: #337AB7;    /* Action Blue — link phụ, CTA thứ cấp */
+  --color-action-blue-dark: #285f8f;
+
+  /* ------------------------------------------------------------
+     MÀU SẮC — NỀN & CHỮ
+     ------------------------------------------------------------ */
+  --color-bg: #FFFFFF;             /* Nền chính toàn site */
+  --color-bg-alt: #F5F5F7;         /* Nền phụ — section xen kẽ, card nền nhạt */
+  --color-bg-muted: #FAFAFA;       /* Nền rất nhạt — table stripe, input disabled */
+
+  --color-text-primary: #1A1A1A;   /* Chữ chính, thân bài */
+  --color-text-secondary: #545454; /* Chữ phụ, mô tả, caption */
+  --color-text-muted: #8A8A8A;     /* Chữ mờ — placeholder, timestamp */
+  --color-text-on-navy: #FFFFFF;   /* Chữ trên nền navy */
+  --color-text-on-crimson: #FFFFFF;/* Chữ trên nền crimson */
+
+  --color-border: #E1E1E1;         /* Viền mặc định — input, card, bảng */
+  --color-border-strong: #C4C4C4;  /* Viền đậm hơn — hover, focus phụ */
+
+  /* ------------------------------------------------------------
+     MÀU SẮC — TRẠNG THÁI
+     ------------------------------------------------------------ */
+  --color-success: #1E8E3E;
+  --color-success-tint: #e8f5ea;
+
+  --color-warning: #B45309;
+  --color-warning-tint: #fef3e2;
+
+  --color-error: var(--color-crimson);
+  --color-error-tint: var(--color-crimson-tint);
+
+  --color-info: var(--color-action-blue);
+  --color-info-tint: #e8f1f9;
+
+  /* ------------------------------------------------------------
+     TYPOGRAPHY
+     ------------------------------------------------------------ */
+  --font-family-base: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont,
+                       'Segoe UI', Roboto, Arial, sans-serif;
+  --font-family-mono: 'Space Mono', 'Courier New', monospace; /* dùng riêng cho số đếm ngược */
+
+  --font-size-xs:   0.75rem;   /* 12px */
+  --font-size-sm:   0.875rem;  /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md:   1.125rem;  /* 18px */
+  --font-size-lg:   1.5rem;    /* 24px */
+  --font-size-xl:   2rem;      /* 32px */
+  --font-size-2xl:  2.5rem;    /* 40px */
+  --font-size-3xl:  3rem;      /* 48px */
+
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-extrabold:800;
+
+  --line-height-tight:  1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose:  1.7;
+
+  /* ------------------------------------------------------------
+     SPACING (thang 4px)
+     ------------------------------------------------------------ */
+  --space-1:  0.25rem;  /* 4px */
+  --space-2:  0.5rem;   /* 8px */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.5rem;   /* 24px */
+  --space-6:  2rem;     /* 32px */
+  --space-7:  3rem;     /* 48px */
+  --space-8:  4rem;     /* 64px */
+  --space-9:  6rem;     /* 96px */
+
+  /* ------------------------------------------------------------
+     BORDER RADIUS
+     "Brand signature" — bo tròn 17px cho input/button/badge,
+     bo góc 0px cho container/card lớn (tinh thần sharp, formal)
+     ------------------------------------------------------------ */
+  --radius-signature: 17px;   /* button, input, pill, badge */
+  --radius-sm:         4px;   /* chi tiết nhỏ, tag */
+  --radius-none:        0px;   /* card lớn, section, bảng */
+
+  /* ------------------------------------------------------------
+     SHADOW
+     ------------------------------------------------------------ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 84, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 84, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 84, 0.14);
+  --shadow-navy-tint: 0 4px 16px rgba(0, 0, 84, 0.08); /* shadow đặc trưng, dùng cho card nổi */
+
+  /* ------------------------------------------------------------
+     LAYOUT
+     ------------------------------------------------------------ */
+  --container-max-width: 1200px;
+  --container-padding-inline: var(--space-5);
+
+  --header-topbar-height: 56px;
+  --header-navbar-height: 52px;
+  --header-total-height: calc(var(--header-topbar-height) + var(--header-navbar-height));
+
+  /* ------------------------------------------------------------
+     TRANSITION
+     ------------------------------------------------------------ */
+  --transition-fast:   120ms ease;
+  --transition-base:   200ms ease;
+  --transition-slow:   320ms ease;
+
+  /* ------------------------------------------------------------
+     Z-INDEX SCALE
+     ------------------------------------------------------------ */
+  --z-header:   100;
+  --z-dropdown: 200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+
+  /* ------------------------------------------------------------
+     BREAKPOINTS (dùng làm tham chiếu trong comment — CSS không
+     có biến cho media query, giữ lại đây để đồng bộ khi viết base.css)
+     - mobile:  < 640px
+     - tablet:  640px – 1023px
+     - desktop: >= 1024px
+     ------------------------------------------------------------ */
+}

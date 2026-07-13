@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Path2Campus — Đếm ngược lịch thi THPT Quốc Gia</title>
+  <meta name="description" content="Hệ thống đếm ngược thời gian phát đề, làm bài thi THPT Quốc Gia chính xác theo từng giây. Cập nhật lịch thi, trạng thái phòng thi tự động." />
+  <meta name="keywords" content="đếm ngược lịch thi, đếm ngược thptqg, lịch thi thpt quốc gia, đồng hồ đếm ngược thi đại học" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://path2campus.cloud/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Path2Campus" />
+  <meta property="og:title" content="Path2Campus — Đếm ngược lịch thi THPT Quốc Gia" />
+  <meta property="og:description" content="Hệ thống đếm ngược thời gian phát đề, làm bài thi THPT Quốc Gia chính xác theo từng giây. Cập nhật lịch thi, trạng thái phòng thi tự động." />
+  <meta property="og:url" content="https://path2campus.cloud/" />
+  <meta property="og:image" content="https://path2campus.cloud/img/og-image.webp" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Path2Campus — Đếm ngược lịch thi THPT Quốc Gia" />
+  <meta name="twitter:description" content="Hệ thống đếm ngược thời gian phát đề, làm bài thi THPT Quốc Gia chính xác theo từng giây." />
+  <meta name="twitter:image" content="https://path2campus.cloud/img/og-image.webp" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/img/favicon.png" />
+  <link rel="apple-touch-icon" href="/img/favicon.png" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" />
+
+  <!-- CSS — đúng thứ tự phụ thuộc -->
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/countdown.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <div class="site-header__topbar">
+      <div class="container">
+        <a href="/" class="site-header__logo">
+          <img src="/img/logo.webp" alt="Path2Campus" />
+          <span class="site-header__brand">Path2Campus</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="site-header__navbar">
+      <div class="container">
+        <nav class="site-nav" aria-label="Điều hướng chính">
+          <a href="/" class="site-nav__link is-active">Trang chủ</a>
+          <a href="/nhom-ho-tro.html" class="site-nav__link">Nhóm hỗ trợ</a>
+          <a href="/diem-chuan.html" class="site-nav__link">Tra cứu điểm chuẩn</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ============================================================
+         BANNER — carousel auto-play, chỉ ở trang chủ
+         ============================================================ -->
+    <section class="banner" id="banner">
+      <div class="banner__track" id="bannerTrack">
+        <div class="banner__slide is-active">
+          <img src="/img/banner/img1.webp" alt="Banner 1" />
+        </div>
+        <div class="banner__slide">
+          <img src="/img/banner/img2.webp" alt="Banner 2" />
+        </div>
+        <div class="banner__slide">
+          <img src="/img/banner/img3.webp" alt="Banner 3" />
+        </div>
+      </div>
+
+      <button class="banner__nav banner__nav--prev" id="bannerPrev" aria-label="Ảnh trước">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="banner__nav banner__nav--next" id="bannerNext" aria-label="Ảnh tiếp theo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="banner__dots" id="bannerDots">
+        <button class="banner__dot is-active" data-slide="0" aria-label="Ảnh 1"></button>
+        <button class="banner__dot" data-slide="1" aria-label="Ảnh 2"></button>
+        <button class="banner__dot" data-slide="2" aria-label="Ảnh 3"></button>
+      </div>
+
+      <!-- Card nội dung — đè giữa banner, đổi theo từng slide (banner.js) -->
+      <div class="banner__card">
+        <p class="banner__card-title" id="bannerCardTitle"></p>
+        <a href="#" class="btn btn--primary" id="bannerCardBtn" target="_blank" rel="noopener noreferrer">Truy cập</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HERO / COUNTDOWN
+         ============================================================ -->
+    <section class="countdown-hero text-center">
+      <div class="container">
+
+        <span class="badge badge--crimson">Kỳ thi THPT Quốc Gia</span>
+        <h1 class="countdown-hero__title">
+          Đếm ngược lịch thi THPTQG <span id="heroYear">2026</span>
+        </h1>
+
+        <!-- Thẻ môn thi tiếp theo (trạng thái upcoming) -->
+        <div class="next-exam-card" id="nextExamCard">
+          <p class="next-exam-card__label">Môn thi tiếp theo</p>
+          <p class="next-exam-card__subject" id="nextSubject">—</p>
+          <p class="next-exam-card__date" id="nextDate">—</p>
+          <div class="time-pills">
+            <span class="time-pill">📋 Phát đề: <strong id="nextDistribute">—</strong></span>
+            <span class="time-pill time-pill--start">✏️ Làm bài: <strong id="nextStart">—</strong></span>
+            <span class="time-pill time-pill--duration">⏱ <strong id="nextDuration">—</strong> phút</span>
+          </div>
+        </div>
+
+        <!-- Banner khi đang phát đề / đang thi -->
+        <div class="exam-active-banner" id="examActiveBanner">
+          <span class="exam-active-banner__icon">🎯</span>
+          <h2>Đang thi!</h2>
+          <p id="activeExamText">Chúc bạn làm bài thật tốt!</p>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" id="timeRemainingFill" style="width:100%"></div>
+          </div>
+        </div>
+
+        <!-- Countdown số -->
+        <p class="countdown-label" id="countdownLabel">Đang tính toán thời gian...</p>
+
+        <div class="countdown-grid" id="countdownGrid">
+          <div class="countdown-box">
+            <span class="countdown-box__num" id="cd-days">00</span>
+            <span class="countdown-box__unit">Ngày</span>
+          </div>
+          <div class="countdown-box">
+            <span class="countdown-box__num" id="cd-hours">00</span>
+            <span class="countdown-box__unit">Giờ</span>
+          </div>
+          <div class="countdown-box">
+            <span class="countdown-box__num" id="cd-mins">00</span>
+            <span class="countdown-box__unit">Phút</span>
+          </div>
+          <div class="countdown-box">
+            <span class="countdown-box__num" id="cd-secs">00</span>
+            <span class="countdown-box__unit">Giây</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         QUOTE SECTION
+         ============================================================ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="quote-card">
+          <span class="quote-card__mark">"</span>
+          <p class="quote-card__text" id="quoteText"></p>
+          <p class="quote-card__author" id="quoteAuthor"></p>
+          <p class="quote-card__author-sub" id="quoteAuthorSub"></p>
+          <div class="quote-dots" id="quoteDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCHEDULE SECTION
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="schedule-header">
+          <h2>Lịch thi chi tiết</h2>
+          <span class="badge badge--navy" id="scheduleYearBadge">2026</span>
+        </div>
+        <div id="scheduleList"></div>
+
+        <p class="text-muted" style="font-size: var(--font-size-xs); text-align: center; margin-top: var(--space-5);">
+          * Lịch thi các năm sau 2026 mang tính chất dự kiến, sẽ được cập nhật khi có thông báo chính thức từ Bộ GD&amp;ĐT.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="grid grid--cols-3">
+        <div>
+          <img src="/img/logo.webp" alt="Path2Campus" style="height: 32px; margin-bottom: var(--space-3);" />
+          <p style="opacity: 0.8; font-size: var(--font-size-sm);">
+            Nền tảng đếm ngược lịch thi &amp; tra cứu điểm chuẩn đại học dành cho học sinh Việt Nam.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: var(--color-text-on-navy); margin-bottom: var(--space-3);">Liên kết</h4>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <a href="/">Trang chủ</a>
+            <a href="/nhom-ho-tro.html">Nhóm hỗ trợ</a>
+            <a href="/diem-chuan.html">Tra cứu điểm chuẩn</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: var(--color-text-on-navy); margin-bottom: var(--space-3);">Liên hệ</h4>
+          <p style="opacity: 0.8; font-size: var(--font-size-sm);">pathtocampus@proton.me</p>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <p>&copy; 2026 Path2Campus — Lidora Studio. Dữ liệu điểm chuẩn chỉ mang tính chất tham khảo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS — đúng thứ tự phụ thuộc -->
+  <script src="/js/nav.js"></script>
+  <script src="/js/banner.js"></script>
+  <script src="/js/countdown.js"></script>
+</body>
+</html>
