@@ -1,0 +1,17 @@
+{
+  "name": "path2campus",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Path2Campus — Đếm ngược lịch thi THPTQG & tra cứu điểm chuẩn đại học",
+  "type": "module",
+  "scripts": {
+    "build": "node generate.js",
+    "dev": "node generate.js && npx serve dist"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
