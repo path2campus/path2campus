@@ -6,7 +6,8 @@
 
 
 /* ------------------------------------------------------------
-   HEADER — top bar (navy) + nav bar (trắng), 2 tầng, cố định
+   HEADER — top bar (navy, 1 hàng: logo trái + nav chính phải)
+   + sub bar (trắng, 2 dropdown căn giữa), cố định
    ------------------------------------------------------------ */
 .site-header {
   position: fixed;
@@ -22,23 +23,31 @@
   background-color: var(--color-navy);
   display: flex;
   align-items: center;
+  overflow: visible; /* cho phép logo tràn ra ngoài top bar */
 }
 
-.site-header__topbar .container {
+.site-header__topbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-4);
+  position: relative;
 }
 
+/* Logo — phóng to, tràn xuống dưới mép top bar (giống hiệu ứng RMIT) */
 .site-header__logo {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  position: relative;
+  z-index: 2;
 }
 
 .site-header__logo img {
-  height: 32px;
+  height: 68px;
   width: auto;
+  margin-block: calc((68px - var(--header-topbar-height)) / 2);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
 }
 
 .site-header__brand {
@@ -48,53 +57,262 @@
   letter-spacing: 0.02em;
 }
 
-.site-header__navbar {
-  height: var(--header-navbar-height);
-  background-color: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-}
-
+/* Nav chính — căn phải, chữ trắng trên nền navy */
 .site-nav {
   display: flex;
   align-items: center;
   gap: var(--space-6);
-  height: 100%;
+  margin-left: auto;
 }
 
 .site-nav__link {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  color: rgba(255, 255, 255, 0.85);
   padding-block: var(--space-2);
   border-bottom: 2px solid transparent;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .site-nav__link:hover {
-  color: var(--color-crimson);
+  color: #ffffff;
 }
 
 .site-nav__link.is-active {
-  color: var(--color-navy);
+  color: #ffffff;
   border-bottom-color: var(--color-crimson);
 }
 
-/* Menu mobile — hiện hamburger dưới breakpoint tablet */
+/* Sub bar — trắng, 2 dropdown căn giữa */
+.site-header__subbar {
+  height: var(--header-subbar-height);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+}
+
+.site-subnav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-7);
+  height: 100%;
+}
+
+.site-subnav__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 100%;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
+}
+
+.site-subnav__trigger:hover {
+  color: var(--color-crimson);
+}
+
+.site-subnav__caret {
+  transition: transform var(--transition-fast);
+}
+
+.dropdown.is-open .site-subnav__trigger {
+  color: var(--color-crimson);
+}
+
+.dropdown.is-open .site-subnav__caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.dropdown {
+  position: relative;
+  height: 100%;
+}
+
+.dropdown__panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 1px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-4);
+  min-width: 200px;
+  display: none;
+  z-index: var(--z-dropdown);
+}
+
+.dropdown.is-open .dropdown__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Panel dạng lưới ngang 4 cột — dùng cho "Xếp hạng học thuật" */
+.dropdown__panel--grid {
+  display: none;
+  flex-direction: row;
+  min-width: 560px;
+  gap: var(--space-2);
+}
+
+.dropdown.is-open .dropdown__panel--grid {
+  display: flex;
+}
+
+.dropdown__item {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  text-align: center;
+}
+
+.dropdown__panel--grid .dropdown__item {
+  flex: 1;
+}
+
+.dropdown__item:hover {
+  background-color: var(--color-navy-tint-90);
+  color: var(--color-navy);
+}
+
+/* Menu toggle (hamburger) — chỉ hiện trên mobile */
 .site-header__menu-toggle {
   display: none;
+  color: var(--color-text-on-navy);
+  flex-shrink: 0;
+  z-index: 2;
 }
 
 @media (max-width: 767px) {
-  .site-nav {
+  .site-nav,
+  .site-header__subbar {
     display: none;
   }
 
   .site-header__menu-toggle {
     display: flex;
-    color: var(--color-navy);
   }
+
+  .site-header__logo img {
+    height: 40px;
+    margin-block: 0;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE NAV PANEL — trượt từ bên phải, che ~75% màn hình
+   ------------------------------------------------------------ */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 84, 0.5);
+  z-index: var(--z-overlay);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.mobile-nav-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 78%;
+  max-width: 340px;
+  background-color: var(--color-bg);
+  z-index: var(--z-modal);
+  transform: translateX(100%);
+  transition: transform var(--transition-slow);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.mobile-nav-panel.is-open {
+  transform: translateX(0);
+}
+
+.mobile-nav-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-nav-panel__close {
+  color: var(--color-text-secondary);
+}
+
+.mobile-nav-panel__nav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-5);
+}
+
+.mobile-nav-panel__link {
+  padding: var(--space-4) 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-nav-panel__divider {
+  height: var(--space-3);
+}
+
+.mobile-nav-panel__accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4) 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-nav-panel__accordion-trigger.is-open .site-subnav__caret {
+  transform: rotate(180deg);
+}
+
+.mobile-nav-panel__accordion-body {
+  display: none;
+  flex-direction: column;
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  gap: var(--space-1);
+}
+
+.mobile-nav-panel__accordion-body.is-open {
+  display: flex;
+}
+
+.mobile-nav-panel__accordion-body a {
+  padding: var(--space-3) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.mobile-nav-panel__accordion-body a:hover {
+  color: var(--color-crimson);
 }
 
 
