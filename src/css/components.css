@@ -112,7 +112,7 @@
 }
 
 .site-subnav__trigger:hover {
-  color: var(--color-crimson);
+  color: var(--color-action-blue);
 }
 
 .site-subnav__caret {
@@ -120,70 +120,74 @@
 }
 
 .dropdown.is-open .site-subnav__trigger {
-  color: var(--color-crimson);
+  color: var(--color-action-blue);
 }
 
 .dropdown.is-open .site-subnav__caret {
   transform: rotate(180deg);
 }
 
-/* Dropdown panel */
+/* Dropdown panel — full chiều rộng viewport, đè ngay dưới sub bar
+   (giống mega-menu RMIT), nội dung căn giữa theo container */
 .dropdown {
-  position: relative;
+  position: static;
   height: 100%;
 }
 
 .dropdown__panel {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 1px;
+  position: fixed;
+  top: var(--header-total-height);
+  left: 0;
+  width: 100%;
   background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-lg);
-  padding: var(--space-4);
-  min-width: 200px;
+  padding: var(--space-6) var(--container-padding-inline);
   display: none;
   z-index: var(--z-dropdown);
 }
 
 .dropdown.is-open .dropdown__panel {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  justify-content: center;
 }
 
 /* Panel dạng lưới ngang 4 cột — dùng cho "Xếp hạng học thuật" */
 .dropdown__panel--grid {
   display: none;
-  flex-direction: row;
-  min-width: 560px;
-  gap: var(--space-2);
 }
 
 .dropdown.is-open .dropdown__panel--grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  gap: var(--space-3);
 }
 
 .dropdown__item {
   display: block;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-4);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
-  white-space: nowrap;
   border-radius: var(--radius-sm);
   transition: background-color var(--transition-fast), color var(--transition-fast);
   text-align: center;
 }
 
 .dropdown__panel--grid .dropdown__item {
-  flex: 1;
+  border-left: 1px solid var(--color-border);
+}
+
+.dropdown__panel--grid .dropdown__item:first-child {
+  border-left: none;
 }
 
 .dropdown__item:hover {
-  background-color: var(--color-navy-tint-90);
-  color: var(--color-navy);
+  background-color: var(--color-info-tint);
+  color: var(--color-action-blue-dark);
 }
 
 /* Menu toggle (hamburger) — chỉ hiện trên mobile */
@@ -709,11 +713,9 @@
 
 .site-footer a {
   color: var(--color-text-on-navy);
-  opacity: 0.8;
 }
 
 .site-footer a:hover {
-  opacity: 1;
   text-decoration: underline;
 }
 
