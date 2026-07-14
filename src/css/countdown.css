@@ -66,66 +66,44 @@
 .banner__nav--prev { left: var(--space-4); }
 .banner__nav--next { right: var(--space-4); }
 
-.banner__dots {
-  position: absolute;
-  bottom: var(--space-4);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  gap: var(--space-2);
-}
-
-.banner__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  transition: background-color var(--transition-fast), width var(--transition-fast);
-}
-
-.banner__dot.is-active {
-  background-color: #fff;
-  width: 20px;
-  border-radius: var(--radius-signature);
-}
-
-/* Card nội dung — đè giữa banner, nội dung đổi theo slide (banner.js) */
+/* Card nội dung — thanh ngang đè đáy banner, full chiều rộng,
+   chữ trái + nút phải (kiểu RMIT), nền tối bán trong suốt */
 .banner__card {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 3;
-  max-width: 420px;
-  width: calc(100% - var(--space-8));
-  background-color: rgba(255, 255, 255, 0.96);
-  border-radius: var(--radius-none);
-  box-shadow: var(--shadow-lg);
-  padding: var(--space-5) var(--space-6);
-  text-align: center;
+  background-color: rgba(0, 0, 20, 0.55);
+  padding: var(--space-6) var(--space-7);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  justify-content: space-between;
+  gap: var(--space-5);
 }
 
 .banner__card-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-navy);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
   line-height: var(--line-height-tight);
+  max-width: 640px;
 }
 
 @media (max-width: 639px) {
   .banner__card {
-    max-width: none;
-    width: calc(100% - var(--space-6));
+    flex-direction: column;
+    align-items: flex-start;
     padding: var(--space-4) var(--space-5);
+    gap: var(--space-3);
   }
 
   .banner__card-title {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
+  }
+
+  .banner__card .btn {
+    align-self: flex-start;
   }
 }
 
