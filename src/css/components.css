@@ -160,9 +160,6 @@
 .dropdown.is-open .dropdown__panel--grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  width: 100%;
-  max-width: var(--container-max-width);
-  margin-inline: auto;
   gap: var(--space-3);
 }
 
