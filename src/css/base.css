@@ -169,6 +169,14 @@ strong, b {
   padding-top: var(--header-total-height);
 }
 
+/* Trên mobile, sub bar bị ẩn hoàn toàn (chỉ còn top bar) —
+   giảm padding-top tương ứng, tránh khoảng trống thừa phía trên */
+@media (max-width: 767px) {
+  .page-content {
+    padding-top: var(--header-topbar-height);
+  }
+}
+
 /* Lưới cột dùng chung — ví dụ khối "3 card giới thiệu" kiểu RMIT */
 .grid {
   display: grid;
