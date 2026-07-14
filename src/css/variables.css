@@ -114,8 +114,8 @@
   --container-padding-inline: var(--space-5);
 
   --header-topbar-height: 56px;
-  --header-navbar-height: 52px;
-  --header-total-height: calc(var(--header-topbar-height) + var(--header-navbar-height));
+  --header-subbar-height: 48px;
+  --header-total-height: calc(var(--header-topbar-height) + var(--header-subbar-height));
 
   /* ------------------------------------------------------------
      TRANSITION
