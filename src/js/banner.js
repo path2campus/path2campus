@@ -1,7 +1,7 @@
 /* ============================================================
    PATH2CAMPUS — BANNER CAROUSEL
-   Auto-play + nút bấm tay (prev/next/dots) + card nội dung
-   riêng cho từng slide, load động từ data/banner-content.json
+   Auto-play + nút bấm tay (prev/next) + card nội dung riêng cho
+   từng slide, load động từ data/banner-content.json
    ============================================================ */
 
 (function () {
@@ -9,7 +9,6 @@
 
   const track   = document.getElementById('bannerTrack');
   const slides  = track ? track.querySelectorAll('.banner__slide') : [];
-  const dots    = document.querySelectorAll('#bannerDots .banner__dot');
   const btnPrev = document.getElementById('bannerPrev');
   const btnNext = document.getElementById('bannerNext');
   const cardTitle = document.getElementById('bannerCardTitle');
@@ -65,10 +64,6 @@
       slide.classList.toggle('is-active', i === current);
     });
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === current);
-    });
-
     updateCard(current);
   }
 
@@ -118,13 +113,6 @@
       resetAutoplay();
     });
   }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      goToSlide(i);
-      resetAutoplay();
-    });
-  });
 
   // Tạm dừng auto-play khi hover (desktop) để người dùng đọc nội dung card
   const bannerEl = document.getElementById('banner');
