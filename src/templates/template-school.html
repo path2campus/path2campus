@@ -12,10 +12,18 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Path2Campus" />
   <meta property="og:title" content="Điểm chuẩn {{SCHOOL_NAME}} {{LATEST_YEAR}} — Path2Campus" />
   <meta property="og:description" content="Điểm chuẩn trúng tuyển {{SCHOOL_NAME}} ({{SCHOOL_CODE}}) các năm gần nhất, cập nhật đầy đủ theo từng ngành." />
   <meta property="og:url" content="{{CANONICAL_URL}}" />
   <meta property="og:image" content="https://path2campus.cloud/img/og-image.webp" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Điểm chuẩn {{SCHOOL_NAME}} {{LATEST_YEAR}} — Path2Campus" />
+  <meta name="twitter:description" content="Điểm chuẩn trúng tuyển {{SCHOOL_NAME}} ({{SCHOOL_CODE}}) các năm gần nhất." />
+  <meta name="twitter:image" content="https://path2campus.cloud/img/og-image.webp" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/img/favicon.png" />
@@ -45,28 +53,112 @@
 <body>
 
   <!-- ============================================================
-       HEADER
+       HEADER — 2 tầng: top bar (navy, 1 hàng logo + nav chính căn phải)
+       + sub bar (trắng, 2 dropdown căn giữa)
        ============================================================ -->
   <header class="site-header">
     <div class="site-header__topbar">
-      <div class="container">
+      <div class="container site-header__topbar-inner">
         <a href="/" class="site-header__logo">
           <img src="/img/logo.webp" alt="Path2Campus" />
           <span class="site-header__brand">Path2Campus</span>
         </a>
-      </div>
-    </div>
 
-    <div class="site-header__navbar">
-      <div class="container">
         <nav class="site-nav" aria-label="Điều hướng chính">
           <a href="/" class="site-nav__link">Trang chủ</a>
           <a href="/nhom-ho-tro.html" class="site-nav__link">Nhóm hỗ trợ</a>
           <a href="/diem-chuan.html" class="site-nav__link">Tra cứu điểm chuẩn</a>
         </nav>
+
+        <button class="site-header__menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="site-header__subbar">
+      <div class="container">
+        <nav class="site-subnav" aria-label="Điều hướng phụ">
+
+          <div class="dropdown" id="dropdownRankings">
+            <button class="site-subnav__trigger" aria-expanded="false">
+              Xếp hạng học thuật
+              <svg class="site-subnav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="dropdown__panel dropdown__panel--grid">
+              <a href="https://vnur.vn/" class="dropdown__item" target="_blank" rel="noopener noreferrer">VNUR</a>
+              <a href="https://www.topuniversities.com/world-university-rankings/2026" class="dropdown__item" target="_blank" rel="noopener noreferrer">QS Rankings</a>
+              <a href="https://www.timeshighereducation.com/world-university-rankings" class="dropdown__item" target="_blank" rel="noopener noreferrer">THE Rankings</a>
+              <a href="https://www.shanghairanking.com/" class="dropdown__item" target="_blank" rel="noopener noreferrer">ARWU (Shanghai)</a>
+            </div>
+          </div>
+
+          <div class="dropdown" id="dropdownIntro">
+            <button class="site-subnav__trigger" aria-expanded="false">
+              Giới thiệu
+              <svg class="site-subnav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="dropdown__panel">
+              <a href="https://thpt-lochiep-dongnai.edu.vn/" class="dropdown__item" target="_blank" rel="noopener noreferrer">THPT Lộc Hiệp</a>
+            </div>
+          </div>
+
+        </nav>
       </div>
     </div>
   </header>
+
+  <!-- ============================================================
+       MOBILE NAV — panel trượt từ bên phải, che ~75% màn hình
+       ============================================================ -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav-panel" id="mobileNavPanel" aria-hidden="true">
+    <div class="mobile-nav-panel__header">
+      <span class="site-header__brand" style="color: var(--color-navy);">Menu</span>
+      <button class="mobile-nav-panel__close" id="mobileNavClose" aria-label="Đóng menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-panel__nav">
+      <a href="/" class="mobile-nav-panel__link">Trang chủ</a>
+      <a href="/nhom-ho-tro.html" class="mobile-nav-panel__link">Nhóm hỗ trợ</a>
+      <a href="/diem-chuan.html" class="mobile-nav-panel__link">Tra cứu điểm chuẩn</a>
+
+      <div class="mobile-nav-panel__divider"></div>
+
+      <button class="mobile-nav-panel__accordion-trigger" data-accordion="rankings">
+        Xếp hạng học thuật
+        <svg class="site-subnav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="mobile-nav-panel__accordion-body" data-accordion-body="rankings">
+        <a href="https://vnur.vn/" target="_blank" rel="noopener noreferrer">VNUR</a>
+        <a href="https://www.topuniversities.com/world-university-rankings/2026" target="_blank" rel="noopener noreferrer">QS Rankings</a>
+        <a href="https://www.timeshighereducation.com/world-university-rankings" target="_blank" rel="noopener noreferrer">THE Rankings</a>
+        <a href="https://www.shanghairanking.com/" target="_blank" rel="noopener noreferrer">ARWU (Shanghai)</a>
+      </div>
+
+      <button class="mobile-nav-panel__accordion-trigger" data-accordion="intro">
+        Giới thiệu
+        <svg class="site-subnav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="mobile-nav-panel__accordion-body" data-accordion-body="intro">
+        <a href="https://thpt-lochiep-dongnai.edu.vn/" target="_blank" rel="noopener noreferrer">THPT Lộc Hiệp</a>
+      </div>
+    </nav>
+  </aside>
 
   <main class="page-content">
 
