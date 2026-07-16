@@ -1,0 +1,155 @@
+/* ============================================================
+   PATH2CAMPUS — CẨM NANG CHỌN TRƯỜNG
+   Style cho các bài viết dài, nhiều trường, dạng biên tập.
+   Phụ thuộc: variables.css, base.css, components.css
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   HERO
+   ------------------------------------------------------------ */
+.cam-nang-hero {
+  padding-block: var(--space-9) var(--space-6);
+  background-color: var(--color-bg-alt);
+}
+
+
+/* ------------------------------------------------------------
+   KHUNG BÀI VIẾT — giới hạn chiều rộng đọc thoải mái (~760px)
+   ------------------------------------------------------------ */
+.cam-nang-article {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.cam-nang-part__title {
+  color: var(--color-navy);
+  font-size: var(--font-size-xl);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
+  border-bottom: 2px solid var(--color-crimson);
+}
+
+.cam-nang-part__intro {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-7);
+}
+
+
+/* ------------------------------------------------------------
+   THẺ HỒ SƠ TỪNG TRƯỜNG
+   ------------------------------------------------------------ */
+.school-profile {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.school-profile:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.school-profile__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-alt);
+  margin-bottom: var(--space-5);
+}
+
+.school-profile__body h3 {
+  color: var(--color-navy);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-4);
+}
+
+.school-profile__body p {
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-loose);
+}
+
+.school-profile__body p strong {
+  color: var(--color-navy);
+  font-weight: var(--font-weight-semibold);
+}
+
+.school-profile__body ul {
+  list-style: disc;
+  margin: 0 0 var(--space-4) var(--space-5);
+  padding-left: var(--space-3);
+}
+
+.school-profile__body li {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-loose);
+}
+
+.school-profile__body li::marker {
+  color: var(--color-action-blue);
+}
+
+
+/* ------------------------------------------------------------
+   HỘP TỔNG KẾT — nổi bật, dùng cho phần "layout bỏ túi" cuối bài
+   ------------------------------------------------------------ */
+.summary-box {
+  background-color: var(--color-bg-alt);
+  border-left: 4px solid var(--color-crimson);
+  padding: var(--space-6);
+  border-radius: var(--radius-sm);
+}
+
+.summary-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.summary-box li {
+  position: relative;
+  padding-left: var(--space-6);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-primary);
+}
+
+.summary-box li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-crimson);
+  font-weight: var(--font-weight-bold);
+}
+
+.summary-box li strong {
+  color: var(--color-navy);
+}
+
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------ */
+@media (max-width: 639px) {
+  .cam-nang-hero {
+    padding-block: var(--space-7) var(--space-5);
+  }
+
+  .cam-nang-part__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .school-profile {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+  }
+
+  .summary-box {
+    padding: var(--space-5);
+  }
+}
