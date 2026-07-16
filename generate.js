@@ -226,6 +226,20 @@ function generateSchoolPages(schools, scores) {
 }
 
 
+// Các trang cẩm nang — viết tay, không sinh từ Supabase, nhưng vẫn cần
+// khai báo trong sitemap để Google biết crawl (đây là nội dung SEO chính).
+const CAM_NANG_PAGES = [
+  'it',
+  'ky-thuat',
+  'kinh-te',
+  'supham',
+  'nghe-thuat',
+  'khoa-hoc-xa-hoi',
+  'dai-hoc-quoc-te',
+  'tu-thuc',
+];
+
+
 // ============================================================
 // 5. SINH SITEMAP.XML
 // ============================================================
@@ -237,12 +251,17 @@ function generateSitemap(generatedSchools) {
     // noindex, không nên khai báo cho Google crawl.
   ];
 
+  const camNangUrls = CAM_NANG_PAGES.map((slug) => ({
+    loc: `${SITE_URL}/cam-nang/${slug}.html`,
+    priority: '0.85',
+  }));
+
   const schoolUrls = generatedSchools.map((s) => ({
     loc: `${SITE_URL}/diem-chuan/${s.slug}/`,
     priority: '0.8',
   }));
 
-  const allUrls = [...staticUrls, ...schoolUrls];
+  const allUrls = [...staticUrls, ...camNangUrls, ...schoolUrls];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
