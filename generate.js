@@ -20,7 +20,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const SRC_DIR  = path.join(__dirname, 'src');
 const DIST_DIR = path.join(__dirname, 'dist');
-const SITE_URL = 'https://path2campus.cloud';
+const SITE_URL = 'https://path2campus.io.vn';
 
 // Thứ tự cột phải khớp đúng với template-school.html và diem-chuan.js
 const COLUMN_KEYS = [
