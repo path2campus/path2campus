@@ -207,15 +207,15 @@ function generateSchoolPages(schools, scores) {
       .replaceAll('{{YEARS_LIST}}', years.join(', '))
       .replaceAll('{{CANONICAL_URL}}', canonicalUrl);
 
-    // Dùng regex thay vì so khớp chuỗi tuyệt đối cho placeholder quan trọng
-    // nhất — chấp nhận khoảng trắng linh hoạt quanh tên biến, phòng trường
-    // hợp file template dính ký tự ẩn (non-breaking space, zero-width...)
-    // do copy-paste qua nhiều nơi khiến so khớp chuỗi cứng bị thất bại.
-    const scoreRowsPattern = /\{\{\s*SCORE_TABLE_ROWS\s*\}\}/;
-    if (!scoreRowsPattern.test(html)) {
-      console.warn(`⚠️  KHÔNG tìm thấy placeholder {{SCORE_TABLE_ROWS}} trong template cho ${school.school_code} — kiểm tra lại template-school.html.`);
+    // Chèn nội dung bảng điểm bằng cách neo vào thẻ <tbody>...</tbody> thay vì
+    // so khớp placeholder "{{SCORE_TABLE_ROWS}}" — tránh hoàn toàn rủi ro
+    // template dính ký tự ẩn/Unicode lookalike (ví dụ dấu ngoặc full-width)
+    // khiến so khớp chuỗi/regex thất bại dù mắt thường thấy giống hệt.
+    const tbodyPattern = /<tbody>[\s\S]*?<\/tbody>/;
+    if (!tbodyPattern.test(html)) {
+      console.warn(`⚠️  KHÔNG tìm thấy thẻ <tbody>...</tbody> trong template cho ${school.school_code} — kiểm tra lại template-school.html.`);
     }
-    html = html.replace(scoreRowsPattern, scoreRowsHtml);
+    html = html.replace(tbodyPattern, `<tbody>\n${scoreRowsHtml}\n            </tbody>`);
 
     // Placeholder ẩn cột header — mỗi key có 1 placeholder riêng dạng {{HIDE_KEY}}
     // Cũng dùng regex linh hoạt khoảng trắng, đồng bộ với SCORE_TABLE_ROWS ở trên.
